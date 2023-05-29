@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void ramka(HANDLE h, int width, int height, string Maze[], int color) {
+void maze(HANDLE h, int width, int height, string Maze[], int color) {
 
 	SetConsoleTextAttribute(h, color); // установка цвета, которым рисуется рамка поля
 	for (int y = 0; y < height; y++) // стандартный двойной цикл на отрисовку рамки
@@ -74,7 +74,7 @@ int main()
 		CONSOLE_CURSOR_INFO cci = { sizeof(char), false }; // создание параметров на отображение курсора
 		int color = 1;
 		SetConsoleOutputCP(866);
-		ramka(h, width1, height1, Maze1, color);
+		maze(h, width1, height1, Maze1, color);
 
 		int dx = 0, dy = 0; // создание смещений по осям для движения 
 		int xRabbit = 1, yRabbit = 13;
@@ -128,25 +128,25 @@ int main()
 					objects.runRight(xRabbit, yRabbit, Maze1);
 					break;
 				case 27: // если была нажата клавиша ESC
-					flag = false; // устанавливаем флажок на ЛОЖЬ, чтоб закончить показ движения
+					flag = false;  
 					break;
 				}
 				objects.moveFox(xRabbit, yRabbit, xFox, yFox, Maze1);
 			}
 
-			if (xRabbit == 0 || xRabbit == width1 - 1 || yRabbit == 0 || yRabbit == height1 - 1) // проверка на достижение границ поля
+			if (xRabbit == 0 || xRabbit == width1 - 1 || yRabbit == 0 || yRabbit == height1 - 1)  
 			{
-				flag = false; // пока что - просто установка управляющей переменной цикла
+				flag = false;  
 			}
 			else {
 				Sleep(100);
-				if (xRabbit == xFox and yRabbit == yFox)// проверка на достижение границ поля
+				if (xRabbit == xFox and yRabbit == yFox) 
 				{
 					system("cls");
 					cout << "you lose((";
 					break;
 				}
-				else if (xRabbit == xPurpose and yRabbit == yPurpose)// проверка на достижение границ поля
+				else if (xRabbit == xPurpose and yRabbit == yPurpose) 
 				{
 					system("cls");
 					cout << "you won))";
@@ -162,7 +162,7 @@ int main()
 		{
 			system("cls");
 			SetConsoleOutputCP(866);
-			ramka(h, width2, height2, Maze2, 9);
+			maze(h, width2, height2, Maze2, 9);
 			int xRabbit = 1, yRabbit = 18;
 			int xFox = 3, yFox = 2;
 			int xFox1 = 43, yFox1 = 3;
@@ -172,50 +172,50 @@ int main()
 			char purpose = 'x';
 
 
-			c.X = xRabbit; // связываем объект координат с позициями "яблока"
+			c.X = xRabbit;  
 			c.Y = yRabbit;
 
 			SetConsoleOutputCP(65001);
-			SetConsoleCursorPosition(h, c); // отправляем курсор на позицию зайца
-			SetConsoleTextAttribute(h, 15); // устанавливаем красный цвет для отрисовки зайца
-			cout << u8"\u020D"; // отображаем символ зайца
+			SetConsoleCursorPosition(h, c); 
+			SetConsoleTextAttribute(h, 15);  
+			cout << u8"\u020D";  
 
-			c.X = xPurpose; // связываем объект координат с позициями "яблока"
+			c.X = xPurpose;  
 			c.Y = yPurpose;
 
-			SetConsoleCursorPosition(h, c); // отправляем курсор на позицию цели
-			SetConsoleTextAttribute(h, 4); // устанавливаем красный цвет для отрисовки цели
-			putchar(purpose); // отображаем символ цели
+			SetConsoleCursorPosition(h, c); 
+			SetConsoleTextAttribute(h, 4); 
+			putchar(purpose);  
 
 			Objects objects = Objects(xRabbit, yRabbit, xFox, yFox, yFox1, xFox1, yFox2, xFox2, 0, 0, 0, 0, 40, 15);
 
-			bool flag = true; // переменная для управления ходом цикла
+			bool flag = true;  
 
 
 			while (flag)
 			{
 				if (_kbhit())
 				{
-					Sleep(10); // задержка потока программы на заданный ранее интервал
-					int k = _getch(); // считываем код клавиши из буфера
-					if (k == 0 || k == 224) // если первый код - вспомогательный, считываем второй код
+					Sleep(10);  
+					int k = _getch();  
+					if (k == 0 || k == 224)  
 						k = _getch();
-					switch (k) // пропускаем код нажатой клавиши внутрь оператора выбора
+					switch (k)  
 					{
-					case 80: // если была нажата клавиша вниз
+					case 80:  
 						objects.runDown(xRabbit, yRabbit, Maze2);
 						break;
-					case 72: // если вверх
+					case 72:  
 						objects.runUp(xRabbit, yRabbit, Maze2);
 						break;
-					case 75: // если влево
+					case 75: 
 						objects.runLeft(xRabbit, yRabbit, Maze2);
 						break;
-					case 77: // если вправо
+					case 77:  
 						objects.runRight(xRabbit, yRabbit, Maze2);
 						break;
-					case 27: // если была нажата клавиша ESC
-						flag = false; // устанавливаем флажок на ЛОЖЬ, чтоб закончить показ движения
+					case 27:  
+						flag = false;  
 						break;
 					}
 					objects.moveFox(xRabbit, yRabbit, xFox, yFox, Maze2);
@@ -225,17 +225,17 @@ int main()
 
 				if (xRabbit == 0 || xRabbit == width2 - 1 || yRabbit == 0 || yRabbit == height2 - 1) // проверка на достижение границ поля
 				{
-					flag = false; // пока что - просто установка управляющей переменной цикла
+					flag = false;
 				}
 				else {
 					Sleep(100);
-					if ((xRabbit == xFox and yRabbit == yFox) or (xRabbit == xFox1 and yRabbit == yFox1) or (xRabbit == xFox2 and yRabbit == yFox2))// проверка на достижение границ поля
+					if ((xRabbit == xFox and yRabbit == yFox) or (xRabbit == xFox1 and yRabbit == yFox1) or (xRabbit == xFox2 and yRabbit == yFox2)) 
 					{
 						system("cls");
 						cout << "you lose((";
 						break;
 					}
-					else if (xRabbit == xPurpose and yRabbit == yPurpose)// проверка на достижение границ поля
+					else if (xRabbit == xPurpose and yRabbit == yPurpose) 
 					{
 						system("cls");
 						cout << "you won))";
@@ -254,7 +254,7 @@ int main()
 		{
 			system("cls");
 			SetConsoleOutputCP(866);
-			ramka(h, width3, height3, Maze3, 11);
+			maze(h, width3, height3, Maze3, 11);
 			int xRabbit = 5, yRabbit = 10;
 			int xFox = 1, yFox = 1;
 			int xFox1 = 1, yFox1 = 18;
@@ -266,47 +266,47 @@ int main()
 			char purpose = 'x';
 
 
-			c.X = xRabbit; // связываем объект координат с позициями "яблока"
+			c.X = xRabbit; 
 			c.Y = yRabbit;
 
 			SetConsoleOutputCP(65001);
-			SetConsoleCursorPosition(h, c); // отправляем курсор на позицию зайца
-			SetConsoleTextAttribute(h, 15); // устанавливаем красный цвет для отрисовки зайца
-			cout << u8"\u020D"; // отображаем символ зайца
+			SetConsoleCursorPosition(h, c);  
+			SetConsoleTextAttribute(h, 15); 
+			cout << u8"\u020D"; 
 
-			c.X = xPurpose; // связываем объект координат с позициями "яблока"
+			c.X = xPurpose;  
 			c.Y = yPurpose;
 
-			SetConsoleCursorPosition(h, c); // отправляем курсор на позицию цели
-			SetConsoleTextAttribute(h, 4); // устанавливаем красный цвет для отрисовки цели
-			putchar(purpose); // отображаем символ цели
+			SetConsoleCursorPosition(h, c);  
+			SetConsoleTextAttribute(h, 4);  
+			putchar(purpose);  
 
 			Objects objects = Objects(xRabbit, yRabbit, xFox, yFox, yFox1, xFox1, yFox2, xFox2, yFox3, xFox3, yFox4, xFox4, 40, 15);
 
 			bool temp1 = false;
-			bool flag = true; // переменная для управления ходом цикла
+			bool flag = true; 
 
 
 			while (flag)
 			{
 				if (_kbhit())
 				{
-					Sleep(10); // задержка потока программы на заданный ранее интервал
-					int k = _getch(); // считываем код клавиши из буфера
-					if (k == 0 || k == 224) // если первый код - вспомогательный, считываем второй код
+					Sleep(10);  
+					int k = _getch();  
+					if (k == 0 || k == 224)  
 						k = _getch();
-					switch (k) // пропускаем код нажатой клавиши внутрь оператора выбора
+					switch (k)  
 					{
-					case 80: // если была нажата клавиша вниз
+					case 80: 
 						objects.runDown(xRabbit, yRabbit, Maze3);
 						break;
-					case 72: // если вверх
+					case 72:  
 						objects.runUp(xRabbit, yRabbit, Maze3);
 						break;
-					case 75: // если влево
+					case 75:  
 						objects.runLeft(xRabbit, yRabbit, Maze3);
 						break;
-					case 77: // если вправо
+					case 77: 
 						objects.runRight(xRabbit, yRabbit, Maze3);
 						break;
 					case 27: // если была нажата клавиша ESC
@@ -320,14 +320,14 @@ int main()
 					objects.moveFox(xRabbit, yRabbit, xFox4, yFox4, Maze3);
 				}
 
-				if (xRabbit == 0 || xRabbit == width3 - 1 || yRabbit == 0 || yRabbit == height3 - 1) // проверка на достижение границ поля
+				if (xRabbit == 0 || xRabbit == width3 - 1 || yRabbit == 0 || yRabbit == height3 - 1)  
 				{
-					flag = false; // пока что - просто установка управляющей переменной цикла
+					flag = false;  
 				}
 				else {
 					Sleep(100);
 					if ((xRabbit == xFox and yRabbit == yFox) or (xRabbit == xFox1 and yRabbit == yFox1) or (xRabbit == xFox2 and yRabbit == yFox2)
-						or (xRabbit == xFox3 and yRabbit == yFox3) or (xRabbit == xFox4 and yRabbit == yFox4))// проверка на достижение границ поля
+						or (xRabbit == xFox3 and yRabbit == yFox3) or (xRabbit == xFox4 and yRabbit == yFox4)) 
 					{
 						system("cls");
 						cout << "you lose((";
